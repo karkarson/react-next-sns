@@ -35,7 +35,7 @@ if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
   }))
 }else{
   app.use(morgan('dev'));
-  app.use(cors({
+  app.use(cors({ //origin: ture
     origin: ['http://localhost:3000'],
     credentials: true,
   }))

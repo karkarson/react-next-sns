@@ -2,6 +2,8 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const multerS3 = require('multer-s3');
+const AWS = require('aws-sdk');
 
 const { Post, User, Comment, Image, Hashtag  } = require('../models');
 const { isLoggedIn } = require('./middlewares');
@@ -16,26 +18,48 @@ try {
     fs.mkdirSync('uploads');
 }
 
-// 이미지 업로드
+AWS.config.update({
+    accessKeyId: process.env.S3_ACCESS_KEY_ID,
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+    region: 'ap-northeast-2',
+});
+
 const upload = multer({
-    storage : multer.diskStorage({
-        destination(req, file, done) {
-            done(null, 'uploads');
-        },
-        filename(req, file, done) {
-            const ext = path.extname(file.originalname); //확장자
-            const basename = path.basename(file.originalname, ext); //확장자 제외
-            done(null, basename + '_' + new Date().getTime() + ext);
-        },
+    storage: multerS3({
+        s3: new AWS.S3(),
+        bucket: 'naversns-s3',
+        key(req, file, cb) {
+        cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`)
+        }
     }),
     limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
 });
 
-// 이미지 업로드
-router.post('/images', isLoggedIn, upload.array('image'),  (req, res, next) => {
+router.post('/images', isLoggedIn, upload.array('image'), (req, res, next) => { // POST /post/images
     console.log(req.files);
-    res.json(req.files.map((v) => v.filename));
+    res.json(req.files.map((v) => v.location.replace(/\/original\//, '/thumb/')));
 });
+
+// // 이미지 업로드 diskStorage
+// const upload = multer({
+//     storage : multer.diskStorage({
+//         destination(req, file, done) {
+//             done(null, 'uploads');
+//         },
+//         filename(req, file, done) {
+//             const ext = path.extname(file.originalname); //확장자
+//             const basename = path.basename(file.originalname, ext); //확장자 제외
+//             done(null, basename + '_' + new Date().getTime() + ext);
+//         },
+//     }),
+//     limits: { fileSize: 20 * 1024 * 1024 }, // 20MB
+// });
+
+// // 이미지 업로드
+// router.post('/images', isLoggedIn, upload.array('image'),  (req, res, next) => {
+//     console.log(req.files);
+//     res.json(req.files.map((v) => v.filename));
+// });
 
 //게시물 작성
 router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
