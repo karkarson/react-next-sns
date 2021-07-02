@@ -1,0 +1,1 @@
+export const backUrl = 'http://3.35.230.203';
