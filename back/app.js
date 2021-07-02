@@ -33,7 +33,7 @@ if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
   app.use(morgan('dev'));
 }
 app.use(cors({
-  origin: ['http://localhost:3000', 'nodebird.com'],
+  origin: ['http://localhost:3000', 'nodebird.com', 'http://3.34.255.9'],
   credentials: true,
 }))
 
