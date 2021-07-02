@@ -30,7 +30,7 @@ if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
   app.use(hpp()); //보안
   app.use(helmet()); //보안
   app.use(cors({
-    origin: ['naversns.com', 'http://3.34.255.9'],
+    origin: ['http://naversns.com'],
     credentials: true,
   }))
 }else{
@@ -51,6 +51,11 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
   secret: process.env.COOKIE_SECRET,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    domain: process.env.NODE_ENV === 'production' && '.naversns.com'
+  },
 }));
 app.use(passport.initialize());
 app.use(passport.session());
