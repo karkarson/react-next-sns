@@ -6,6 +6,8 @@ const cors = require('cors');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const path = require('path');
+const hpp = require('hpp');
+const helmet = require('helmet');
 
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
@@ -23,9 +25,15 @@ db.sequelize.sync()
   .catch(console.error);
 passportConfig();
 
-app.use(morgan('dev'));
+if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
+  app.use(morgan('combined')); //자세한 로그
+  app.use(hpp()); //보안
+  app.use(helmet()); //보안
+}else{
+  app.use(morgan('dev'));
+}
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'nodebird.com'],
   credentials: true,
 }))
 

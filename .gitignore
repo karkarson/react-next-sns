@@ -136,7 +136,7 @@ typings/
 .serverless
 /front/build/
 react-next-sns-server.pem
-react-next-sns.pem
+react-next-sns-bserver.pem
 node_modules
 .env
 .next
