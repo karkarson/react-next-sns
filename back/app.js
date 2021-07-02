@@ -29,13 +29,17 @@ if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
   app.use(morgan('combined')); //자세한 로그
   app.use(hpp()); //보안
   app.use(helmet()); //보안
+  app.use(cors({
+    origin: ['naversns.com', 'http://3.34.255.9'],
+    credentials: true,
+  }))
 }else{
   app.use(morgan('dev'));
+  app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true,
+  }))
 }
-app.use(cors({
-  origin: ['http://localhost:3000', 'nodebird.com', 'http://3.34.255.9'],
-  credentials: true,
-}))
 
 app.use('/', express.static(path.join(__dirname, 'uploads')));
 
