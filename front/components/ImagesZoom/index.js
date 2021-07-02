@@ -21,7 +21,7 @@ const ImagesZoom = ({ images, onClose }) => {
             beforeChange={(slide, newSlide) => setCurrentSlide(newSlide)}
             infinite
             arrows={false}
-            //slidesToShow={1}
+            slidesToShow={1}
             slidesToScroll={1}
           >
             {images.map((v) => (
