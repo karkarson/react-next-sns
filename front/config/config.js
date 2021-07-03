@@ -1,1 +1,1 @@
-export const backUrl = 'http://api.naversns.com';
+export const backUrl = 'https://api.naversns.com';

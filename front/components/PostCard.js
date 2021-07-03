@@ -115,7 +115,7 @@ const PostCard = ({ post }) => {
             >
               <div style={{ float: 'right' }}>{dayjs(post.createdAt).format('YYYY-MM-DD')}</div>
               <Card.Meta
-                avatar={<Link href={`/user/${post.Retweet.User.id}`}>
+                avatar={<Link href={`/user/${post.Retweet.User.id}`} prefetch={false}>
                           <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
                         </Link>}
                 title={post.Retweet.User.nickname}
@@ -127,7 +127,7 @@ const PostCard = ({ post }) => {
             <>
             <div style={{ float: 'right' }}>{dayjs(post.createdAt).format('YYYY-MM-DD')}</div>
             <Card.Meta
-              avatar={<Link href={`/user/${post.User.id}`}>
+              avatar={<Link href={`/user/${post.User.id}`} prefetch={false}>
                         <a><Avatar>{post.User.nickname[0]}</Avatar></a>
                       </Link>}
               title={post.User.nickname}
@@ -148,7 +148,7 @@ const PostCard = ({ post }) => {
                 <Comment
                   author={item.User.nickname}
                   avatar={(
-                      <Link href={`/user/${item.User.id}`}><a><Avatar>{item.User.nickname[0]}</Avatar></a></Link>
+                      <Link href={`/user/${item.User.id}`} prefetch={false}><a><Avatar>{item.User.nickname[0]}</Avatar></a></Link>
                   )}
                   content={item.content}
                 />

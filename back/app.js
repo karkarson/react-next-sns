@@ -25,18 +25,20 @@ db.sequelize.sync()
   .catch(console.error);
 passportConfig();
 
+
 if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
+  app.set('trust proxy', 1); //cookie
   app.use(morgan('combined')); //자세한 로그
   app.use(hpp()); //보안
   app.use(helmet()); //보안
   app.use(cors({
-    origin: ['http://naversns.com'],
+    origin: ['https://naversns.com'],
     credentials: true,
   }))
 }else{
   app.use(morgan('dev'));
-  app.use(cors({ //origin: ture
-    origin: ['http://localhost:3000'],
+  app.use(cors({ //origin: ['http://localhost:3000']
+    origin: true,
     credentials: true,
   }))
 }
@@ -51,9 +53,10 @@ app.use(session({
   saveUninitialized: false,
   resave: false,
   secret: process.env.COOKIE_SECRET,
+  proxy: true,
   cookie: {
     httpOnly: true,
-    secure: false,
+    secure: true, 
     domain: process.env.NODE_ENV === 'production' && '.naversns.com'
   },
 }));
@@ -70,6 +73,6 @@ app.use('/posts', postsRouter);
 app.use('/hashtag', hashtagRouter);
 
 
-app.listen(80, () => {
+app.listen(3065, () => {
     console.log('서버 실행 중')
 });
