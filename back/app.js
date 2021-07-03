@@ -43,7 +43,7 @@ if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
   }))
 }
 
-app.use('/', express.static(path.join(__dirname, 'uploads')));
+//app.use('/', express.static(path.join(__dirname, 'uploads')));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
