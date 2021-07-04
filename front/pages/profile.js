@@ -11,6 +11,7 @@ import { LOAD_FOLLOWERS_REQUEST, LOAD_FOLLOWINGS_REQUEST, LOAD_MY_INFO_REQUEST }
 import AppLayout from '../components/AppLayout';
 import FollowList from '../components/FollowList';
 import NicknameEditForm from '../components/NicknameEditForm';
+import { backUrl } from '../config/config';
 
 const fetcher = (url) => axios.get(url, {withCredentials: true}).then((result)=> result.data);
 
@@ -19,8 +20,8 @@ const Profile = () => {
     //const dispatch = useDispatch(); SWR로 대체
     const [followingsLimit, setFollowingsLimit] = useState(3);
     const [followersLimit, setFollowersLimit] = useState(3);
-    const { data: followingsData , error: followingError } = useSWR(`http://localhost:3065/user/followings?limit=${followingsLimit}` , fetcher);
-    const { data: followersData , error: followerError } = useSWR(`http://localhost:3065/user/followers?limit=${followersLimit}` , fetcher);
+    const { data: followingsData , error: followingError } = useSWR(`${backUrl}/user/followings?limit=${followingsLimit}` , fetcher);
+    const { data: followersData , error: followerError } = useSWR(`${backUrl}/user/followers?limit=${followersLimit}` , fetcher);
     
     const { me } = useSelector((state) => state.user);
     const id = me?.id;

@@ -30,14 +30,15 @@ if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
   app.set('trust proxy', 1); //cookie
   app.use(morgan('combined')); //자세한 로그
   app.use(hpp()); //보안
-  app.use(helmet()); //보안
+  app.use(helmet({ contentSecurityPolicy: false })); //보안
   app.use(cors({
-    origin: ['https://naversns.com'],
+    origin: 'https://naversns.com',
     credentials: true,
   }))
 }else{
   app.use(morgan('dev'));
-  app.use(cors({ //origin: ['http://localhost:3000']
+  //origin: ['http://localhost:3000']
+  app.use(cors({ 
     origin: true,
     credentials: true,
   }))
