@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { Input, Form, Button } from 'antd'
 import styled from 'styled-components';
+import Router from 'next/router';
 
 import useInput from '../hooks/useInput';
 import { loginRequestAction, LOG_IN_REQUEST } from '../reducers/user'
-import UserProfile from './UserProfile';
 
 const FormWrapper = styled(Form)`
     padding : 10px;
@@ -37,8 +37,8 @@ const LoginForm = () => {
         // });
     },[email, password]);
 
-    if(me){
-        return <UserProfile />
+    if(me?.id){
+        Router.replace('./UserProfile');
     }
 
     return(
