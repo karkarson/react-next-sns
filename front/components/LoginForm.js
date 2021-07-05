@@ -38,7 +38,8 @@ const LoginForm = () => {
     },[email, password]);
 
     if(me?.id){
-        Router.replace('./UserProfile');
+        console.log('로그인폼 바꾸기')
+        Router.push('./UserProfile.js');
     }
 
     return(
