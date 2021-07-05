@@ -27,7 +27,8 @@ passportConfig();
 
 
 if(process.env.NODE_ENV === 'production'){ //배포 모드일 때
-  app.set('trust proxy', 1); //cookie
+  //app.set('trust proxy', 1); //cookie
+  app.enable('trust proxy');
   app.use(morgan('combined')); //자세한 로그
   app.use(hpp()); //보안
   app.use(helmet({ contentSecurityPolicy: false })); //보안
