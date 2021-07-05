@@ -37,10 +37,12 @@ const LoginForm = () => {
         // });
     },[email, password]);
 
-    if(me?.id){
-        console.log('로그인폼 바꾸기')
-        Router.push('./UserProfile.js');
-    }
+    useEffect(() => { 
+        console.log('로그인폼 유즈 이팩트 라우터');
+        if(me && me.id){ 
+            Router.replace('./UserProfile');
+        }
+    },[me && me.id]);
 
     return(
         <FormWrapper onFinish={onSubmitForm}>
