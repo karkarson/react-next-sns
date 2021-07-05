@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import useInput from '../hooks/useInput';
 import { loginRequestAction, LOG_IN_REQUEST } from '../reducers/user'
+import UserProfile from './UserProfile';
 
 const FormWrapper = styled(Form)`
     padding : 10px;
@@ -14,7 +15,7 @@ const FormWrapper = styled(Form)`
 const LoginForm = () => {
 
     const dispatch = useDispatch();
-    const { logInLoding, logInError } = useSelector((state) => state.user);
+    const { logInLoding, logInError, me } = useSelector((state) => state.user);
     const [email, onChangeEmail] = useInput('');
     const [password, onChangePassword] = useInput('');
     
@@ -35,6 +36,10 @@ const LoginForm = () => {
         //     }
         // });
     },[email, password]);
+
+    if(me?.id){
+        return <UserProfile />
+    }
 
     return(
         <FormWrapper onFinish={onSubmitForm}>
