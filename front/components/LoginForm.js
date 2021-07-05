@@ -37,7 +37,7 @@ const LoginForm = () => {
         // });
     },[email, password]);
 
-    if(me?.id){
+    if(me){
         return <UserProfile />
     }
 
