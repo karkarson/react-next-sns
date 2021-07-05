@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Input, Form, Button } from 'antd'
 import styled from 'styled-components';
 import Router from 'next/router';
+import UserProfile from './UserProfile';
 
 import useInput from '../hooks/useInput';
 import { loginRequestAction, LOG_IN_REQUEST } from '../reducers/user'
@@ -19,11 +20,16 @@ const LoginForm = () => {
     const [email, onChangeEmail] = useInput('');
     const [password, onChangePassword] = useInput('');
     
+
     useEffect(() => {
         if(logInError){
             alert(logInError);
         }
     },[logInError]);
+    
+    useEffect(() => { 
+        {me ? <UserProfile /> : null}
+    },[me]);
 
     const onSubmitForm = useCallback(() => {
         console.log(email,password,);
@@ -36,13 +42,6 @@ const LoginForm = () => {
         //     }
         // });
     },[email, password]);
-
-    useEffect(() => { 
-        console.log('로그인폼 유즈 이팩트 라우터');
-        if(me && me.id){ 
-            Router.replace('./UserProfile');
-        }
-    },[me && me.id]);
 
     return(
         <FormWrapper onFinish={onSubmitForm}>
