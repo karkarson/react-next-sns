@@ -281,7 +281,7 @@ router.patch('/:postId', isLoggedIn, async (req, res, next) => {
         },{
             where: {
                 id: req.params.postId,
-                UserId: req.user.id  
+                UserId: req.user.id  asd
             }
         }); 
         if(hashtags){
