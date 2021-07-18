@@ -4,7 +4,7 @@ import { Card, Button, Avatar, Popover, List, Comment } from 'antd';
 import PropTypes from 'prop-types';
 import { RetweetOutlined, HeartOutlined, HeartFilled, MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
-import { LIKE_POST_REQUEST, REMOVE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST } from '../reducers/post';
+import { LIKE_POST_REQUEST, REMOVE_POST_REQUEST, UNLIKE_POST_REQUEST, RETWEET_REQUEST, UPDATE_POST_REQUEST } from '../reducers/post';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 
