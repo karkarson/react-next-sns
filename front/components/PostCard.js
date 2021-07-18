@@ -26,8 +26,25 @@ const PostCard = ({ post }) => {
   const { removePostLoading } = useSelector((state) => state.post);
   const [commentFormOpened, setCommentFormOpened] = useState(false);
   const id = useSelector((state) => state.user.me?.id);
+  const [editMode, setEditMode] = useState(false);
 
+  const onClickUpdate = useCallback(()=> {
+    setEditMode(true);
+  },[])
 
+  const onCancelUpdate = useCallback(()=> {
+    setEditMode(false);
+  },[])
+
+  const onChangePost = useCallback((editText) => () => {
+    dispatch({
+      type: UPDATE_POST_REQUEST,
+      data: {
+        PostId: post.id,
+        content: editText,
+      },
+    });
+  }, [post]);
 
   const onRemovePost = useCallback(() => {
     if(!id){
@@ -93,7 +110,7 @@ const PostCard = ({ post }) => {
                 {id && post.User.id === id
                 ?
                   <>
-                    <Button>수정</Button>
+                    {!post.RetweetId && <Button onClick={onClickUpdate}>수정</Button>}
                     <Button danger loading={removePostLoading} onClick={onRemovePost}>삭제</Button>
                   </>
                 :
@@ -119,7 +136,7 @@ const PostCard = ({ post }) => {
                           <a><Avatar>{post.Retweet.User.nickname[0]}</Avatar></a>
                         </Link>}
                 title={post.Retweet.User.nickname}
-                description={<PostCardContent postData={post.Retweet.content} />}
+                description={<PostCardContent onCancelUpdate={onCancelUpdate} onChangePost={onChangePost} postData={post.Retweet.content} />}
               />
             </Card>
           )
@@ -131,7 +148,7 @@ const PostCard = ({ post }) => {
                         <a><Avatar>{post.User.nickname[0]}</Avatar></a>
                       </Link>}
               title={post.User.nickname}
-              description={<PostCardContent postData={post.content} />}
+              description={<PostCardContent onCancelUpdate={onCancelUpdate} onChangePost={onChangePost} editMode={editMode} postData={post.content} />}
             />
             </>
           )}

@@ -26,10 +26,6 @@ const LoginForm = () => {
             alert(logInError);
         }
     },[logInError]);
-    
-    useEffect(() => { 
-        {me ? <UserProfile /> : null}
-    },[me]);
 
     const onSubmitForm = useCallback(() => {
         console.log(email,password,);

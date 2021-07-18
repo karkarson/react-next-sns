@@ -12,6 +12,7 @@ import {
     LOAD_POST_REQUEST, LOAD_POST_SUCCESS, LOAD_POST_FAILURE,
     LOAD_USER_POSTS_REQUEST, LOAD_USER_POSTS_SUCCESS, LOAD_USER_POSTS_FAILURE,
     LOAD_HASHTAG_POSTS_REQUEST, LOAD_HASHTAG_POSTS_SUCCESS, LOAD_HASHTAG_POSTS_FAILURE,
+    UPDATE_POST_REQUEST, UPDATE_POST_SUCCESS, UPDATE_POST_FAILURE,
 } from '../reducers/post'; 
 import {ADD_POST_TO_ME, REMOVE_POST_OF_ME} from '../reducers/user';
 
@@ -121,6 +122,27 @@ function* addPost(action){
             type: ADD_POST_FAILURE,
             error: err.response.data
         });
+    }
+}
+
+//게시물 수정 / 해당 아이디 게시물 수정
+function updatePostAPI(data) {
+    return axios.patch(`/post/${data.PostId}`, data );
+}
+  
+function* updatePost(action) {
+    try {
+      const result = yield call(updatePostAPI, action.data);
+      yield put({
+        type: UPDATE_POST_SUCCESS,
+        data: result.data,
+      });
+    } catch (err) {
+      console.error(err);
+      yield put({
+        type: UPDATE_POST_FAILURE,
+        error: err.response.data,
+      });
     }
 }
 
@@ -275,6 +297,10 @@ function* watchLoadPosts() { //게시물 불러오기
     yield takeLatest(ADD_POST_REQUEST, addPost);
 }
   
+  function* watchUpdatePost() { //게시물 수정
+    yield takeLatest(UPDATE_POST_REQUEST, updatePost);
+}
+
   function* watchRemovePost() { //게시물 제거
     yield takeLatest(REMOVE_POST_REQUEST, removePost);
 }
@@ -306,6 +332,7 @@ export default function* postSaga(){
         fork(watchLoadHashtagPosts),
         fork(watchLoadPosts),
         fork(watchAddPost),
+        fork(watchUpdatePost),
         fork(watchRemovePost),
         fork(watchAddComment),
         fork(watchLikePost),
