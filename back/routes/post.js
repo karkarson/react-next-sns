@@ -131,7 +131,6 @@ router.post("/", isLoggedIn, upload.none(), async (req, res, next) => {
 //게시물, 이미지, 해시태그, 댓글 (DB)
 router.get('/getAll', async (req, res, next) => {
 
-  //include 로 바꿔보기
   try{
     const fullPost = await Post.findAll({
       attributes: ['id'],
