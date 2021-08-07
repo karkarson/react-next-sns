@@ -9,6 +9,7 @@ import Router from 'next/router';
 import LoginForm from './LoginForm';
 import UserProfile from './UserProfile';
 import useInput from '../hooks/useInput';
+import Explanation from './Explanation';
 
 const SearchInput = styled(Input.Search)`
   vertical-align: middle;
@@ -26,7 +27,7 @@ const AppLayout = ({ children }) => {
     return (
         <div>
           <Menu mode="horizontal">
-            <Menu.Item key="home"><Link href="/"><a>노드버드</a></Link></Menu.Item>
+            <Menu.Item key="home"><Link href="/"><a>Home</a></Link></Menu.Item>
             <Menu.Item key="profile"><Link href="/profile"><a>프로필</a></Link></Menu.Item>
             <Menu.Item key="mail">
               <SearchInput 
@@ -45,7 +46,7 @@ const AppLayout = ({ children }) => {
                 {children}
             </Col>
             <Col xs={24} md={6}>
-                <a href="https://www.naver.com" target="_blank" rel="noreferrer noopener">naver</a>
+                <Explanation />
             </Col>
           </Row>
 

@@ -1,17 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { Input, Form, Button } from 'antd'
-import styled from 'styled-components';
-import Router from 'next/router';
-import UserProfile from './UserProfile';
+import { Input, Button } from 'antd'
+import { Success, Error, Label, LinkContainer, FormWrapper, Header } from './Style';
 
 import useInput from '../hooks/useInput';
 import { loginRequestAction, LOG_IN_REQUEST } from '../reducers/user'
-
-const FormWrapper = styled(Form)`
-    padding : 10px;
-`;
 
 const LoginForm = () => {
 
@@ -19,7 +13,6 @@ const LoginForm = () => {
     const { logInLoding, logInError, me } = useSelector((state) => state.user);
     const [email, onChangeEmail] = useInput('');
     const [password, onChangePassword] = useInput('');
-    
 
     useEffect(() => {
         if(logInError){

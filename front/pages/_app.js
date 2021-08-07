@@ -21,5 +21,5 @@ App.propTypes = {
     Component: PropTypes.elementType.isRequired,
 }
 
-// export default wrapper.withRedux(withReduxSaga(App)); //CSR
-export default wrapper.withRedux(App); //SSR
+// export default wrapper.withRedux(withReduxSaga(App)); 
+export default wrapper.withRedux(App); 
