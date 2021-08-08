@@ -2,6 +2,7 @@
 
 #### 프로젝트 구조
 
+```text
 back(폴더 구조)
 ├── config
 ├── models (DB 설계)
