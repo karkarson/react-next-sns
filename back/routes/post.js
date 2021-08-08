@@ -355,7 +355,7 @@ router.patch("/:postId", isLoggedIn, async (req, res, next) => {
         },
       }
     );
-    const post = await Post.findeOne({ where: { id: req.params.postId } });
+    const post = await Post.findOne({ where: { id: req.params.postId } });
     if (hashtags) {
       const result = await Promise.all(
         hashtags.map((tag) =>
