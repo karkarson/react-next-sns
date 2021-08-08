@@ -1,4 +1,4 @@
-#### (https://www.naversns.com)
+#### (naversns.com)
 
 #### 프로젝트 구조
 
