@@ -40,3 +40,4 @@ pages@index : pages 폴더 -> index.js
 ├── @Explanation@index(우) 
 │            ├─ FuncExplan(정보)
 │            └─ ChipArray(기술 스택)
+```
