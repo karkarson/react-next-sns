@@ -1,6 +1,6 @@
 import produce from '../util/produce';
 import shortId from 'shortid';
-import faker from 'faker';
+// import faker from 'faker';
 
 export const initialState = {
     mainPosts: [],
@@ -88,24 +88,24 @@ export const RETWEET_FAILURE = 'RETWEET_FAILURE';
 
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 
-export const generateDummyPost = (number) => Array(number).fill().map(() => ({
-    id: shortId.generate(),
-    User: {
-        id: shortId.generate(),
-        nickname: faker.name.findName(),
-    },
-    content: faker.lorem.paragraph(),
-    Images: [{
-        src: faker.image.image(),
-    }],
-    Comments: [{
-        User: {
-          id: shortId.generate(),
-          nickname: faker.name.findName(),
-        },
-        content: faker.lorem.sentence(),
-    }],
-}));
+// export const generateDummyPost = (number) => Array(number).fill().map(() => ({
+//     id: shortId.generate(),
+//     User: {
+//         id: shortId.generate(),
+//         nickname: faker.name.findName(),
+//     },
+//     content: faker.lorem.paragraph(),
+//     Images: [{
+//         src: faker.image.image(),
+//     }],
+//     Comments: [{
+//         User: {
+//           id: shortId.generate(),
+//           nickname: faker.name.findName(),
+//         },
+//         content: faker.lorem.sentence(),
+//     }],
+//}));
 
 const reducer = (state = initialState, action) => produce(state, (draft) => {
     switch(action.type){

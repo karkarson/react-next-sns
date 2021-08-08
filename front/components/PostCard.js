@@ -25,7 +25,6 @@ import PostCardContent from "./PostCardContent";
 import PostImages from "./PostImages";
 import FollowButton from "./FollowButton";
 import moment from "moment";
-
 dayjs.locale("ko");
 
 const CardWrapper = styled.div`

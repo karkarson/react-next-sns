@@ -89,14 +89,12 @@ const FuncExplan = () => {
         <List component="div" disablePadding>
           {postData.fullUser.map((user)=> {
             return(
-              <>
-              <ListItem button className={classes.nested}>
+              <ListItem key={user.email} button className={classes.nested}>
                 <ListItemIcon>
                   <PersonPinCircleOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary={user.email} />
               </ListItem>
-              </>
             )
           })}
         </List>

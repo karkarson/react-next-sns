@@ -1,17 +1,27 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import FuncExplan from './FuncExplan';
 import ChipArray from './ChipArray';
 
-const Explanation = () => {
+const FuncDiv = styled.div`
+  margin-top : 10px;
+`;
+const ChipDiv = styled.div`
+  margin-top : 50px;
+`;
 
+
+const Explanation = () => {
   return (
     
     <div>
-   
-      <FuncExplan />
-      <ChipArray />
-      
+      <FuncDiv>
+        <FuncExplan />
+      </FuncDiv>
+      <ChipDiv>
+        <ChipArray />
+      </ChipDiv>
     </div>
   );
 }

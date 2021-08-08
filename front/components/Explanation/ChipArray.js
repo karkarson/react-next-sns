@@ -38,7 +38,7 @@ const ChipArray = () => {
 
   return (
     <div className={classes.root}>
-      {chipInfo.map(info => {
+      {chipInfo.map((info) => {
         return (
           <Chip
             key={info.label}

@@ -15,6 +15,32 @@ const SearchInput = styled(Input.Search)`
   vertical-align: middle;
 `;
 
+// const Backgroud = styled.div`
+//     background-image:url('https://blog.kakaocdn.net/dn/AcIGI/btqxtp2xkg2/EGABG3i2NAMq3kRu1VaGzk/img.jpg');
+//     // background-size: cover;
+//     background-attachment: fixed;
+//     background-repeat: no-repeat;
+//     background-position: left-center;
+
+// `;
+const UpDiv = styled.div`
+  & img, h1 {
+    position: fixed;
+    z-index: 1;
+    height : 100px;
+    width : 100px;
+    float : left;
+    margin-top: 400px;
+  }
+`;
+
+const MenuSticky = styled(Menu)`
+  top: 0;
+  position: sticky;
+  z-index: 1;
+  background-color: #36FFFF;
+`;
+
 const AppLayout = ({ children }) => {
 
     const { me } = useSelector((state) => state.user);
@@ -24,9 +50,13 @@ const AppLayout = ({ children }) => {
       Router.push(`/hashtag/${searchInput}`);
     },[searchInput]);
 
+    const onGoUp = useCallback(()=> {
+      window.scrollTo(0,0);
+    },[])
+
     return (
         <div>
-          <Menu mode="horizontal">
+          <MenuSticky mode="horizontal">
             <Menu.Item key="home"><Link href="/"><a>Home</a></Link></Menu.Item>
             <Menu.Item key="profile"><Link href="/profile"><a>프로필</a></Link></Menu.Item>
             <Menu.Item key="mail">
@@ -36,19 +66,25 @@ const AppLayout = ({ children }) => {
                 onSearch={onSearch}
               enterButton />
             </Menu.Item>
-          </Menu>
-
-          <Row gutter={8}>
-            <Col xs={24} md={6}>
-              {me ? <UserProfile /> : <LoginForm />}
-            </Col>
-            <Col xs={24} md={12}>
-                {children}
-            </Col>
-            <Col xs={24} md={6}>
-                <Explanation />
-            </Col>
-          </Row>
+          </MenuSticky>
+          
+          <div>
+            <Row gutter={8}>
+              <Col xs={24} md={6}>
+                {me ? <UserProfile /> : <LoginForm />}
+                <UpDiv onClick={onGoUp}>
+                  <img src="https://blog.kakaocdn.net/dn/AcIGI/btqxtp2xkg2/EGABG3i2NAMq3kRu1VaGzk/img.jpg" />
+                  <h1>UP!</h1>
+                </UpDiv>
+              </Col>
+              <Col xs={24} md={12}>
+                  {children}
+              </Col>
+              <Col xs={24} md={6}>
+                  <Explanation />
+              </Col>
+            </Row>
+          </div>
 
         </div>
       );

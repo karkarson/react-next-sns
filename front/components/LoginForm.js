@@ -1,11 +1,19 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import { Input, Button } from 'antd'
-import { Success, Error, Label, LinkContainer, FormWrapper, Header } from './Style';
+import styled from 'styled-components';
+import { Input, Form, Button } from 'antd'
 
 import useInput from '../hooks/useInput';
 import { loginRequestAction, LOG_IN_REQUEST } from '../reducers/user'
+
+const FormWrapper = styled(Form)`
+    padding : 10px;
+`;
+
+const ButtonDiv = styled.div`
+    margin : 10px;
+`;
 
 const LoginForm = () => {
 
@@ -42,10 +50,10 @@ const LoginForm = () => {
                 <label htmlFor="user-password">비밀번호</label><br />
                 <Input name="user-password" type="password" value={password} required onChange={onChangePassword} />
             </div>
-            <div>
+            <ButtonDiv>
                 <Button type="primary" htmlType="submit" loading={logInLoding}>로그인</Button>
                 <Link href="/signup"><a><Button>회원가입</Button></a></Link>
-            </div>
+            </ButtonDiv>
         </FormWrapper>
     )
 }
